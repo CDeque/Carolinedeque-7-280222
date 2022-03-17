@@ -1,0 +1,115 @@
+/**** Proprietes générales ****/
+body {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/**** Propriètés Searchbar ****/
+h1 {
+  font-family: "DM Sans";
+  font-weight: 700;
+  font-size: 36px;
+  color: #d04f4f;
+}
+
+/**** Propriètés input dropdown ****/
+.search {
+  display: none;
+  margin-top: 25px;
+  margin-left: -25px;
+}
+.search_ingredient {
+  background-color: #3282f7;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  position: relative;
+  z-index: 3;
+}
+.search_ustensiles {
+  background-color: #68d9a4;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  position: relative;
+  z-index: 3;
+}
+.search_devices {
+  background-color: #ed6454;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  position: relative;
+  z-index: 3;
+}
+/**** Propriètés des liste  ****/
+
+.ingredients_options_container {
+  width: 400px;
+  height: auto;
+  background-color: #3282f7;
+  border-radius: 5px;
+  margin-top: -70px;
+  padding-top: 1px;
+  padding-bottom: 20px;
+  display: none;
+  position: relative;
+  z-index: 3;
+}
+.ustensiles_options_container {
+  width: 400px;
+  background-color: #68d9a4;
+  border-radius: 5px;
+  margin-top: -70px;
+  padding-top: 1px;
+  padding-bottom: 20px;
+  display: none;
+  position: relative;
+  z-index: 3;
+}
+.devices_options_container {
+  width: 400px;
+  background-color: #ed6454;
+  border-radius: 5px;
+  margin-top: -70px;
+  padding-top: 1px;
+  padding-bottom: 20px;
+  display: none;
+  position: relative;
+  z-index: 3;
+}
+
+/**** Creation des cartes recettes ****/
+.cards_container {
+  gap: 10rem;
+}
+.recipes_card {
+  width: 380px;
+  height: 364px;
+  border-radius: 5px;
+  border: 1px solid #e7e7e7;
+  font-size: 12px;
+  font-family: "DM Sans";
+  font-weight: 400;
+}
+.card_picture {
+  width: 455px;
+  height: 178px;
+  border-radius: 5px 5px 0px 0px;
+  background-color: #c7bebe;
+}
+.card_body {
+  background-color: #e7e7e7;
+}
+.recipe_title,
+.time {
+  font-family: "DM Sans";
+  font-size: 20px;
+}
+.ingredients {
+  list-style: none;
+}
+.recipes_card {
+  flex-shrink: 0;
+  overflow-x: hidden;
+}

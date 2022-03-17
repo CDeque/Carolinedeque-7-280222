@@ -1,0 +1,28 @@
+/**** ajout des propriètés boutons dropdown ****/
+.dropdown_btn {
+  width: 170px;
+  height: 69px;
+  border-radius: 5px;
+  border: none;
+  font-family: "Lato";
+  font-size: 18px;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+}
+
+.arrow_icon {
+  padding-left: 30px;
+}
+.ingredients {
+  background-color: #3282f7;
+  color: #fff;
+}
+.ustensiles {
+  background-color: #68d9a4;
+  color: #fff;
+}
+.devices {
+  background-color: #ed6454;
+  color: #fff;
+}
