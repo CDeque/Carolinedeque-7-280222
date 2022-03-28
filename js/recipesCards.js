@@ -50,7 +50,7 @@ export class CreateRecipeCard {
   // Afficher les ingrédients
   createIngredientList(data) {
     const ingredients = data.ingredients;
-
+    //console.log(ingredients);
     ingredients.forEach((ingredient) => {
       this.ingredientsArray = [];
       this.li = document.createElement("li");
