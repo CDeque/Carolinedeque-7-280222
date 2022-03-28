@@ -1,8 +1,11 @@
 import { getRecipes } from "./fetchData.js";
 import { IngredientsDropdown } from "./ingredientsDropdown.js";
 import { UstensilsDropdown } from "./ustensilsDropdown.js";
-import { DevicesDropdown } from "./devicesDropdown.js";
+import { AppliancesDropdown } from "./applianceDropdown.js";
 import { CreateRecipeCard } from "./recipesCards.js";
+import { searchFilter } from "./filterRecipes.js";
+import { dropdownFilterSearch } from "./filterDropdown.js";
+import { filterTag } from "./tags.js";
 
 export class CreateMainPage {
   constructor(data) {
@@ -12,11 +15,16 @@ export class CreateMainPage {
     this.createHeader();
     this.createSearchBar();
     this.createDom();
-    new IngredientsDropdown();
-    new UstensilsDropdown();
-    new DevicesDropdown();
+    new searchFilter(data);
+    new IngredientsDropdown(data);
+    new AppliancesDropdown(data);
+    new UstensilsDropdown(data);
     this.displayRecipes(data);
+    dropdownFilterSearch(data);
+    filterTag(data);
+    this.closeDropdown();
   }
+  // Création du header
   createHeader() {
     this.header = document.createElement("header");
     this.header.classList.add("header", "text-center");
@@ -29,6 +37,7 @@ export class CreateMainPage {
     this.header.appendChild(this.logo);
     this.header.appendChild(this.siteTitle);
   }
+  // Création de la barre de recherche
   createSearchBar() {
     this.form = document.createElement("form");
     this.form.classList.add("input-group");
@@ -40,27 +49,45 @@ export class CreateMainPage {
       "my-3",
       "searchbar"
     );
+    this.input.type = "text";
+    this.input.name = "search";
     this.input.style.backgroundColor = "#e7e7e7";
     this.input.setAttribute("placeholder", "Rechercher une recette...");
+    this.input.focus();
     this.header.appendChild(this.form);
     this.form.appendChild(this.input);
   }
+  // Creation du dom
   createDom() {
     this.main = document.createElement("main");
     this.body.appendChild(this.main);
+    this.tagsSection = document.createElement("section");
+    this.tagsSection.classList.add("tag_section", "mx-5");
     this.section = document.createElement("section");
-    this.section.classList.add("filters_container");
+    this.section.classList.add("filters_section");
     this.sectionRecipes = document.createElement("section");
     this.sectionRecipes.classList.add("cards_container", "row", "mx-5", "my-3");
+    this.main.appendChild(this.tagsSection);
     this.main.appendChild(this.section);
     this.main.appendChild(this.sectionRecipes);
   }
-
+  // Affichage des recettes
   displayRecipes(data) {
     const recipes = data;
 
     recipes.forEach((recipe) => {
       new CreateRecipeCard(recipe);
+    });
+  }
+  closeDropdown() {
+    const dropdowns = document.querySelectorAll(".container");
+    window.addEventListener("click", () => {
+      dropdowns.forEach((dropdown) => {
+        if (dropdown.classList.contains("active")) {
+          console.log(dropdown.classList.contains("active"));
+          dropdown.style.display = "none";
+        }
+      });
     });
   }
 }
