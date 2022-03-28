@@ -1,8 +1,6 @@
-export class IngredientsDropdown {
+export class AppliancesDropdown {
   constructor(data) {
     this.data = data;
-
-    //console.log(this.data);
     this.section = document.querySelector(".filters_section");
 
     this.createdropdown();
@@ -11,34 +9,30 @@ export class IngredientsDropdown {
     this.closeDropdown();
   }
   createdropdown() {
-    this.section.classList.add("row", "mx-5", "my-3");
+    this.section.classList.add("row");
     this.filter = document.createElement("div");
     this.filter.classList.add("filter", "col-2", "p-0");
     this.div = document.createElement("div");
     this.div.classList.add("filter_div");
     this.ul = document.createElement("ul");
     this.ul.classList.add(
-      "ingredients_options_container",
+      "appliances_options_container",
       "container",
       "row",
       "px-0"
     );
     this.ul.style.display = "none";
+
     this.dropdownBtn = document.createElement("button");
-    this.dropdownBtn.classList.add(
-      "dropdown_btn",
-      "ingredients",
-      "mr-1",
-      "pt-1"
-    );
-    this.dropdownBtn.innerHTML = "Ingrédients";
+    this.dropdownBtn.classList.add("dropdown_btn", "devices", "mr-1", "pt-1");
+    this.dropdownBtn.innerHTML = "Appareils";
     this.inputContainer = document.createElement("div");
     this.inputContainer.classList.add("input_container");
     this.input = document.createElement("input");
-    this.input.classList.add("search", "search_ingredient", "mt-4", "mb-2");
-    this.input.placeholder = "Rechercher un ingrédient...";
+    this.input.placeholder = "Rechercher un appareil...";
+    this.input.classList.add("search", "search_devices");
     this.input.type = "text";
-    this.input.name = "ingredients";
+    this.input.name = "appliances";
     this.arrowDown = document.createElement("img");
     this.arrowDown.classList.add("arrow_down");
     this.arrowDown.src = "medias/arrow_down.png";
@@ -57,35 +51,34 @@ export class IngredientsDropdown {
   //Pour afficher la liste d'ingrédients et supprimer les doublons
   displayDropdownData(data) {
     const items = data;
-    let ingredientsArray = [];
-    // Pour afficher les ingredients dans l'ul
-    items.forEach((item) =>
-      item.ingredients.forEach((ingredient) => {
-        ingredientsArray.push(ingredient.ingredient.toLowerCase());
-      })
-    );
+    let appliancesArray = [];
 
-    // Pour supprimer les doublons
-    const filteredIngredients = ingredientsArray.filter(
-      (el, pos) => ingredientsArray.indexOf(el) === pos
+    // Pour afficher les ingredients dans l'ul
+
+    items.forEach((item) => {
+      appliancesArray.push(item.appliance.toLowerCase());
+    });
+
+    //on filtre le tableau pour supprimer les doublons
+    const filteredAppliances = appliancesArray.filter(
+      (el, pos) => appliancesArray.indexOf(el) === pos
     );
 
     // creation de la liste d'appareils
-    filteredIngredients.forEach((ingredient) => {
+    filteredAppliances.forEach((appliance) => {
       this.li = document.createElement("li");
-      this.li.classList.add("ing_list", "col-4");
+      this.li.classList.add("appli_list", "col-4");
       this.li.innerHTML =
-        ingredient.charAt(0).toUpperCase() +
-        ingredient.substring(1).toLowerCase();
+        appliance.charAt(0).toUpperCase() +
+        appliance.substring(1).toLowerCase();
       this.ul.appendChild(this.li);
     });
   }
-
   // Pour activer le dropdown et rendre actif l'input de recherche
   activeDropdown() {
     this.dropdownBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      this.dropdownBtn.classList.toggle("active");
+
       this.ul.style.display = "flex";
       this.input.style.display = "flex";
       this.input.focus();
