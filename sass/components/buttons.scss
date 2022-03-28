@@ -7,22 +7,20 @@
   font-family: "Lato";
   font-size: 18px;
   font-weight: 700;
-  position: relative;
-  z-index: 2;
 }
 
-.arrow_icon {
+.arrow_down {
   padding-left: 30px;
 }
 .ingredients {
-  background-color: #3282f7;
+  background-color: $ingredients;
   color: #fff;
 }
 .ustensiles {
-  background-color: #68d9a4;
+  background-color: $ustensils;
   color: #fff;
 }
 .devices {
-  background-color: #ed6454;
+  background-color: $appliances;
   color: #fff;
 }

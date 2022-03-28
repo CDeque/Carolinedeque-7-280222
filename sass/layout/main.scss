@@ -12,73 +12,6 @@ h1 {
   color: #d04f4f;
 }
 
-/**** Propriètés input dropdown ****/
-.search {
-  display: none;
-  margin-top: 25px;
-  margin-left: -25px;
-}
-.search_ingredient {
-  background-color: #3282f7;
-  color: #fff;
-  border-radius: 3px;
-  border: none;
-  position: relative;
-  z-index: 3;
-}
-.search_ustensiles {
-  background-color: #68d9a4;
-  color: #fff;
-  border-radius: 3px;
-  border: none;
-  position: relative;
-  z-index: 3;
-}
-.search_devices {
-  background-color: #ed6454;
-  color: #fff;
-  border-radius: 3px;
-  border: none;
-  position: relative;
-  z-index: 3;
-}
-/**** Propriètés des liste  ****/
-
-.ingredients_options_container {
-  width: 400px;
-  height: auto;
-  background-color: #3282f7;
-  border-radius: 5px;
-  margin-top: -70px;
-  padding-top: 1px;
-  padding-bottom: 20px;
-  display: none;
-  position: relative;
-  z-index: 3;
-}
-.ustensiles_options_container {
-  width: 400px;
-  background-color: #68d9a4;
-  border-radius: 5px;
-  margin-top: -70px;
-  padding-top: 1px;
-  padding-bottom: 20px;
-  display: none;
-  position: relative;
-  z-index: 3;
-}
-.devices_options_container {
-  width: 400px;
-  background-color: #ed6454;
-  border-radius: 5px;
-  margin-top: -70px;
-  padding-top: 1px;
-  padding-bottom: 20px;
-  display: none;
-  position: relative;
-  z-index: 3;
-}
-
 /**** Creation des cartes recettes ****/
 .cards_container {
   gap: 10rem;
@@ -110,6 +43,31 @@ h1 {
   list-style: none;
 }
 .recipes_card {
-  flex-shrink: 0;
   overflow-x: hidden;
+}
+
+/**** Creation des cartes recettes ****/
+.tag_section {
+  display: flex;
+}
+.tag_search {
+  margin-right: 10px;
+}
+.tag {
+  width: auto;
+  max-width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: $ingredients;
+  color: #fff;
+  font-family: "Lato";
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+.close_button {
+  margin-left: 2px;
 }

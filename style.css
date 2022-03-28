@@ -11118,6 +11118,31 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.slide-right {
+  -webkit-animation: slide-right 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: slide-right 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@-webkit-keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+  }
+}
+@keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+  }
+}
 /**** ajout des propriètés boutons dropdown ****/
 .dropdown_btn {
   width: 170px;
@@ -11127,11 +11152,9 @@ textarea.form-control-lg {
   font-family: "Lato";
   font-size: 18px;
   font-weight: 700;
-  position: relative;
-  z-index: 2;
 }
 
-.arrow_icon {
+.arrow_down {
   padding-left: 30px;
 }
 
@@ -11141,13 +11164,112 @@ textarea.form-control-lg {
 }
 
 .ustensiles {
-  background-color: #68d9a4;
+  background-color: #ed6454;
   color: #fff;
 }
 
 .devices {
+  background-color: #68d9a4;
+  color: #fff;
+}
+
+/**** Propriètés du dropdown ****/
+.ingredients_options_container {
+  width: 500px !important;
+  height: auto;
+  max-height: 300px;
+  background-color: #3282f7;
+  border-radius: 5px;
+  margin-top: -70px !important;
+  margin-left: 0px !important;
+  padding-top: 2px !important;
+  padding-left: 10px;
+  padding-bottom: 20px;
+  position: absolute;
+  overflow-x: hidden;
+}
+
+.ustensiles_options_container {
+  width: 500px !important;
+  max-width: 300px;
+  height: auto;
+  max-height: 300px;
+  background-color: #ed6454;
+  border-radius: 5px;
+  margin-top: -70px !important;
+  margin-left: 0px !important;
+  padding-top: 20px !important;
+  padding-bottom: 10px;
+  position: absolute;
+  overflow-x: hidden;
+  z-index: 10;
+}
+
+.appliances_options_container {
+  width: 500px !important;
+  height: auto;
+  max-height: 300px;
+  background-color: #68d9a4;
+  border-radius: 5px;
+  margin-top: -70px !important;
+  margin-left: 0px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px;
+  position: absolute;
+  overflow-x: hidden;
+  z-index: 10;
+}
+
+/**** Propriètés input dropdown ****/
+.input_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search_ingredient {
+  height: 30px;
+  background-color: #3282f7;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  position: relative;
+  z-index: 3;
+  width: 450px !important;
+}
+
+.search_ustensiles {
+  height: 30px;
   background-color: #ed6454;
   color: #fff;
+  border-radius: 3px;
+  border: none;
+  position: relative;
+  z-index: 3;
+  width: 450px !important;
+}
+
+.search_devices {
+  height: 30px;
+  background-color: #68d9a4;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  position: relative;
+  z-index: 3;
+  width: 450px !important;
+}
+
+/**** Propriètés des liste  ****/
+.ing_list,
+.ust_list,
+.appli_list {
+  list-style: none;
+  font-family: "Lato";
+  font-weight: 400;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
 }
 
 /**** Proprietes générales ****/
@@ -11162,78 +11284,6 @@ h1, .h1 {
   font-weight: 700;
   font-size: 36px;
   color: #d04f4f;
-}
-
-/**** Propriètés input dropdown ****/
-.search {
-  display: none;
-  margin-top: 25px;
-  margin-left: -25px;
-}
-
-.search_ingredient {
-  background-color: #3282f7;
-  color: #fff;
-  border-radius: 3px;
-  border: none;
-  position: relative;
-  z-index: 3;
-}
-
-.search_ustensiles {
-  background-color: #68d9a4;
-  color: #fff;
-  border-radius: 3px;
-  border: none;
-  position: relative;
-  z-index: 3;
-}
-
-.search_devices {
-  background-color: #ed6454;
-  color: #fff;
-  border-radius: 3px;
-  border: none;
-  position: relative;
-  z-index: 3;
-}
-
-/**** Propriètés des liste  ****/
-.ingredients_options_container {
-  width: 400px;
-  height: auto;
-  background-color: #3282f7;
-  border-radius: 5px;
-  margin-top: -70px;
-  padding-top: 1px;
-  padding-bottom: 20px;
-  display: none;
-  position: relative;
-  z-index: 3;
-}
-
-.ustensiles_options_container {
-  width: 400px;
-  background-color: #68d9a4;
-  border-radius: 5px;
-  margin-top: -70px;
-  padding-top: 1px;
-  padding-bottom: 20px;
-  display: none;
-  position: relative;
-  z-index: 3;
-}
-
-.devices_options_container {
-  width: 400px;
-  background-color: #ed6454;
-  border-radius: 5px;
-  margin-top: -70px;
-  padding-top: 1px;
-  padding-bottom: 20px;
-  display: none;
-  position: relative;
-  z-index: 3;
 }
 
 /**** Creation des cartes recettes ****/
@@ -11273,8 +11323,36 @@ h1, .h1 {
 }
 
 .recipes_card {
-  flex-shrink: 0;
   overflow-x: hidden;
+}
+
+/**** Creation des cartes recettes ****/
+.tag_section {
+  display: flex;
+}
+
+.tag_search {
+  margin-right: 10px;
+}
+
+.tag {
+  width: auto;
+  max-width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #3282f7;
+  color: #fff;
+  font-family: "Lato";
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.close_button {
+  margin-left: 2px;
 }
 
 /*# sourceMappingURL=style.css.map */

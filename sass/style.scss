@@ -1,4 +1,6 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
-
+@import "./utils/\ _variable_overrides.scss";
+@import "./utils/animation.scss";
 @import "./components/buttons.scss";
+@import "./components/dropdown.scss";
 @import "./layout/main.scss";
