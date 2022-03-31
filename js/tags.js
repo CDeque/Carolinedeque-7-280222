@@ -31,7 +31,7 @@ export function filterTag(data) {
       section.appendChild(div);
       div.appendChild(tag);
       tags.push(tag);
-      console.log(tags);
+
       ////////// pour assigner la bonne couleur au tag
       if (
         item.parentElement.classList.contains("ingredients_options_container")
@@ -61,7 +61,7 @@ export function filterTag(data) {
               ing.ingredient.toLowerCase().match(tagValue)
             ) ||
             recipe.appliance.toLowerCase().match(tagValue) ||
-            recipe.ustensils.every((ust) => ust.toLowerCase().match(tagValue))
+            recipe.ustensils.some((ust) => ust.toLowerCase().match(tagValue))
           ) {
             //On re-injecte les recettes dans la section
             recipesArray.push(recipe);
@@ -71,9 +71,6 @@ export function filterTag(data) {
             // Pour trier les menus dropdown en ne laissant que les elements correspondants aux recettes
             itemLists.forEach((item) => {
               if (
-                recipe.description
-                  .toLowerCase()
-                  .match(item.innerHTML.toLowerCase()) ||
                 recipe.ingredients.some((ing) =>
                   ing.ingredient
                     .toLowerCase()
@@ -82,7 +79,7 @@ export function filterTag(data) {
                 recipe.appliance
                   .toLowerCase()
                   .match(item.innerHTML.toLowerCase()) ||
-                recipe.ustensils.every((ust) =>
+                recipe.ustensils.some((ust) =>
                   ust.toLowerCase().match(item.innerHTML.toLowerCase())
                 )
               ) {
@@ -108,18 +105,21 @@ export function filterTag(data) {
 
       //Pour fermer les tags au clic
       const closeBtn = document.querySelectorAll(".close_button");
-      console.log(closeBtn);
 
       closeBtn.forEach((btn) => {
+        //console.log(closeBtn);
         btn.addEventListener("click", () => {
-          btn.parentElement.remove();
+          tags.forEach((tag) => {
+            // console.log(tags);
+            tags.splice(tags.indexOf(tag), 0);
+            btn.parentElement.remove();
+          });
 
-          // on vide les sections tag et dropdown
-          document.querySelector(" .tag_section").innerHTML = "";
+          // on vide la section dropdown
+
           document.querySelector(".filters_section").innerHTML = "";
 
           recipesArray = "";
-          tags = "";
 
           // On remet a zéro les dropdown
           new IngredientsDropdown(data);
