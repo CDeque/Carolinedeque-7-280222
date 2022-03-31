@@ -83,17 +83,15 @@ export class IngredientsDropdown {
 
   // Pour activer le dropdown et rendre actif l'input de recherche
   activeDropdown() {
-    this.dropdownBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      this.dropdownBtn.classList.toggle("active");
+    this.dropdownBtn.addEventListener("click", () => {
       this.ul.style.display = "flex";
       this.input.style.display = "flex";
       this.input.focus();
+      this.ul.classList.add("active");
     });
   }
   closeDropdown() {
     this.arrowUp.addEventListener("click", () => {
-      this.dropdownBtn.classList.remove("active");
       this.ul.style.display = "none";
     });
   }

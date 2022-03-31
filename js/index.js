@@ -15,10 +15,10 @@ export class CreateMainPage {
     this.createHeader();
     this.createSearchBar();
     this.createDom();
-    new searchFilter(data);
     new IngredientsDropdown(data);
     new AppliancesDropdown(data);
     new UstensilsDropdown(data);
+    new searchFilter(data);
     this.displayRecipes(data);
     dropdownFilterSearch(data);
     filterTag(data);
@@ -79,16 +79,6 @@ export class CreateMainPage {
       new CreateRecipeCard(recipe);
     });
   }
-  closeDropdown() {
-    const dropdowns = document.querySelectorAll(".container");
-    window.addEventListener("click", () => {
-      dropdowns.forEach((dropdown) => {
-        if (dropdown.classList.contains("active")) {
-          console.log(dropdown.classList.contains("active"));
-          dropdown.style.display = "none";
-        }
-      });
-    });
-  }
+  closeDropdown() {}
 }
 getRecipes();
