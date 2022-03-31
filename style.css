@@ -11355,4 +11355,10 @@ h1, .h1 {
   margin-left: 2px;
 }
 
+.error_message {
+  font-family: "Lato";
+  font-size: 18px;
+  font-weight: 700;
+}
+
 /*# sourceMappingURL=style.css.map */
