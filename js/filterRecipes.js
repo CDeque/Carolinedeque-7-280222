@@ -4,16 +4,21 @@ import { CreateRecipeCard } from "./recipesCards.js";
 
 export function searchFilter(data) {
   const recipes = data;
-  this.sectionRecipes = document.querySelector(".cards_container");
+  const sectionRecipes = document.querySelector(".cards_container");
+  const itemLists = document.querySelectorAll(
+    "li.ing_list,li.appli_list, li.ust_list"
+  );
 
-  this.input = document.querySelector(".searchbar");
+  const input = document.querySelector(".searchbar");
 
-  this.input.addEventListener("keyup", (e) => {
+  input.addEventListener("keyup", (e) => {
     // pour recupérer la value de la searchbar
     const searchbarValue = e.target.value.toLowerCase();
-    this.sectionRecipes.innerHTML = "";
+    sectionRecipes.innerHTML = "";
+
     // pour ré-injecter les recette triées
-    this.recipesArray = [];
+    let recipesArray = [];
+    let itemsArray = [];
 
     // si la valeur de la barre de recherche est supérieure ou égale à 3 caractères
     if (searchbarValue.length >= 3) {
@@ -29,49 +34,50 @@ export function searchFilter(data) {
             ust.toLowerCase().match(searchbarValue)
           )
         ) {
-          this.recipesArray.push(recipe);
-          console.log(this.recipesArray);
+          recipesArray.push(recipe);
           new CreateRecipeCard(recipe);
+
+          // Pour n'afficher que les ingredients, ust et app necessaires aux recettes
+          itemLists.forEach((item) => {
+            if (
+              recipe.ingredients.some((ing) =>
+                ing.ingredient.toLowerCase().match(item.innerHTML.toLowerCase())
+              ) ||
+              recipe.appliance
+                .toLowerCase()
+                .match(item.innerHTML.toLowerCase()) ||
+              recipe.ustensils.some((ust) =>
+                ust.toLowerCase().match(item.innerHTML.toLowerCase())
+              )
+            ) {
+              itemsArray.push(item);
+
+              for (let it of itemsArray) {
+                it.style.display = "flex";
+              }
+            } else {
+              item.style.display = "none"; // sinon je les masque
+            }
+          });
         }
       });
+
       // si le nombre de caracteres saisis est inferieur a 2 alors les recettes
     } else if (searchbarValue.length <= 2) {
-      this.recipesArray = recipes.forEach((recipe) => {
+      recipesArray = recipes.forEach((recipe) => {
         new CreateRecipeCard(recipe);
       });
     }
-  });
-}
-//////////////////////////////////////////////
-// mise en place du tri dans les dropdowns //
-////////////////////////////////////////////
-
-export function dropdownFilterSearch() {
-  const inputs = document.querySelectorAll(".search");
-  const allElementsLists = document.querySelectorAll(
-    ".ing_list,.appli_list, .ust_list"
-  );
-  const dropdownBtn = document.querySelectorAll(".dropdown_btn");
-  // récupération de chaque input et de sa valeur
-  inputs.forEach((input) => {
-    input.addEventListener("keyup", (e) => {
-      const searchbarValue = e.target.value.toLowerCase();
-
-      // pour chaque éléments on vérifie si la valeur correspond à un élément de la liste et une recette
-      allElementsLists.forEach((element) => {
-        // si oui on les affiche, non on les masque
-        if (element.innerHTML.toLowerCase().match(searchbarValue)) {
-          element.style.display = "flex";
-        } else {
-          element.style.display = "none";
-        }
-        // Pour afficher les elements dans les autres dropdown lorsque l'on clique dessus
-        dropdownBtn.forEach((btn) => {
-          btn.addEventListener("focus", () => {
-            element.style.display = "flex";
-          });
-        });
-      });
-    });
+    //ajout du message d'erreur si aucune recettende correspond
+    if (sectionRecipes.innerHTML === "") {
+      const messageDiv = document.createElement("div");
+      messageDiv.classList.add("message_container");
+      const messageText = document.createElement("p");
+      messageText.classList.add("error_message");
+      messageText.innerHTML =
+        "Aucune recette ne correspond à votre critère... vous pouvez chercher &laquotarte au pommes&raquo, &laquopoisson&raquo, etc...";
+      sectionRecipes.appendChild(messageDiv);
+      messageDiv.appendChild(messageText);
+    }
   });
 }
