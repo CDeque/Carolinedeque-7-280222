@@ -22,7 +22,7 @@ export function searchFilter(data) {
 
     // si la valeur de la barre de recherche est supérieure ou égale à 3 caractères
     if (searchbarValue.length >= 3) {
-      recipes.filter((recipe) => {
+      for (let recipe of recipes) {
         if (
           recipe.name.toLowerCase().match(searchbarValue) ||
           recipe.description.toLowerCase().match(searchbarValue) ||
@@ -60,14 +60,13 @@ export function searchFilter(data) {
             }
           });
         }
-      });
-
-      // si le nombre de caracteres saisis est inferieur a 2 alors les recettes
+      }
     } else if (searchbarValue.length <= 2) {
       recipesArray = recipes.forEach((recipe) => {
         new CreateRecipeCard(recipe);
       });
     }
+
     //ajout du message d'erreur si aucune recettende correspond
     if (sectionRecipes.innerHTML === "") {
       const messageDiv = document.createElement("div");
