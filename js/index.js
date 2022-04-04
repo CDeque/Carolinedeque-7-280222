@@ -53,6 +53,7 @@ export class CreateMainPage {
     this.input.name = "search";
     this.input.style.backgroundColor = "#e7e7e7";
     this.input.setAttribute("placeholder", "Rechercher une recette...");
+
     this.input.focus();
     this.header.appendChild(this.form);
     this.form.appendChild(this.input);
