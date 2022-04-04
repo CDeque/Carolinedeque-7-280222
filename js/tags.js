@@ -60,14 +60,17 @@ export function filterTag(data) {
         tag.setAttribute("id", "us");
       }
       tags.push(tag);
+<<<<<<< HEAD
       console.log(tags);
+=======
+>>>>>>> master
       sectionRecipes.innerHTML = "";
 
       // pour trier les recettes, les dropdown en fonction des tags choisis
       const tagValue = tagText.innerHTML.toLowerCase();
       console.log(tagValue);
       if (tagValue.length > 0) {
-        recipes.filter((recipe) => {
+        for (let recipe of recipes) {
           if (
             recipe.name.toLowerCase().match(tagValue) ||
             recipe.description.toLowerCase().match(tagValue) ||
@@ -108,7 +111,7 @@ export function filterTag(data) {
               }
             });
           }
-        });
+        }
       }
 
       //pour fermer les dropdown au clic sur un element
@@ -124,7 +127,10 @@ export function filterTag(data) {
           btn.parentElement.parentElement.remove();
 
           if (tags.length >= 1) {
+<<<<<<< HEAD
             //on supprime le tag du tableau en fonction de son index
+=======
+>>>>>>> master
             tags.splice(tags.indexOf(tag), 1);
 
             console.log(tags);
