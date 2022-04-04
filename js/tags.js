@@ -25,11 +25,18 @@ export function filterTag(data) {
       //Ajout du tag en html au clic sur un élément de la liste
       const div = document.createElement("div");
       const tag = document.createElement("div");
+      const tagText = document.createElement("p");
+      const tagIcon = document.createElement("img");
       div.classList.add("tag_search");
       tag.classList.add("tag");
-      tag.innerHTML = `${item.innerHTML}<div class="close_button"><img class="btn" src="medias/close_button.png"></img></div>`;
+      tagIcon.classList.add("btn");
+      tagText.classList.add("text");
+      tagText.innerHTML = item.innerHTML;
+      tagIcon.src = "medias/close_button.png";
       section.appendChild(div);
       div.appendChild(tag);
+      tag.appendChild(tagText);
+      tag.appendChild(tagIcon);
       tags.push(tag);
 
       ////////// pour assigner la bonne couleur au tag
@@ -50,10 +57,10 @@ export function filterTag(data) {
       sectionRecipes.innerHTML = "";
 
       // pour trier les recettes, les dropdown en fonction des tags choisis
-      const tagValue = item.innerHTML.toLowerCase();
+      const tagValue = tagText.innerHTML.toLowerCase();
       console.log(tagValue);
       if (tagValue.length > 0) {
-        recipes.filter((recipe) => {
+        for (let recipe of recipes) {
           if (
             recipe.name.toLowerCase().match(tagValue) ||
             recipe.description.toLowerCase().match(tagValue) ||
@@ -94,7 +101,7 @@ export function filterTag(data) {
               }
             });
           }
-        });
+        }
       }
 
       //pour fermer les dropdown au clic sur un element
@@ -109,10 +116,10 @@ export function filterTag(data) {
       closeBtn.forEach((btn) => {
         //console.log(closeBtn);
         btn.addEventListener("click", () => {
+          btn.parentElement.remove();
           tags.forEach((tag) => {
             // console.log(tags);
             tags.splice(tags.indexOf(tag), 0);
-            btn.parentElement.remove();
           });
 
           // on vide la section dropdown

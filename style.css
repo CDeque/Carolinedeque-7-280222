@@ -11341,13 +11341,18 @@ h1, .h1 {
   height: 40px;
   border-radius: 5px;
   background-color: #3282f7;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.text {
   color: #fff;
   font-family: "Lato";
   font-size: 14px;
   font-weight: 700;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 5px;
 }
 
