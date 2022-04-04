@@ -62,7 +62,11 @@ export function searchFilter(data) {
         }
       });
 
+<<<<<<< HEAD
       // si le nombre de caracteres saisis est inferieur a 2 alors les recettes
+=======
+      // si le nombre de caracteres saisis est inférieur a 2 alors les recettes
+>>>>>>> parent of 5b84209... Merge remote-tracking branch 'origin/master'
     } else if (searchbarValue.length <= 2) {
       recipesArray = recipes.forEach((recipe) => {
         new CreateRecipeCard(recipe);
