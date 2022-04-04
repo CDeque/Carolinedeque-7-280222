@@ -11286,6 +11286,14 @@ h1, .h1 {
   color: #d04f4f;
 }
 
+.searchbar {
+  border-radius: 5px;
+  background-image: url("medias/search_icon.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 20px;
+}
+
 /**** Creation des cartes recettes ****/
 .cards_container {
   gap: 10rem;
@@ -11340,10 +11348,8 @@ h1, .h1 {
   max-width: 300px;
   height: 40px;
   border-radius: 5px;
-  background-color: #3282f7;
   display: flex;
-  justify-content: space-between;
-  padding: 5px;
+  align-items: center;
 }
 
 .text {
@@ -11353,6 +11359,7 @@ h1, .h1 {
   font-weight: 700;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 5px;
 }
 
