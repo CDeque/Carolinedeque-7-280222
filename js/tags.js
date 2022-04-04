@@ -26,18 +26,20 @@ export function filterTag(data) {
       const div = document.createElement("div");
       const tag = document.createElement("div");
       const tagText = document.createElement("p");
-      const tagIcon = document.createElement("img");
+      const crossContainer = document.createElement("span");
+      const cross = document.createElement("img");
       div.classList.add("tag_search");
       tag.classList.add("tag");
-      tagIcon.classList.add("btn");
       tagText.classList.add("text");
+      crossContainer.classList.add("close_button");
+      cross.classList.add("btn");
       tagText.innerHTML = item.innerHTML;
-      tagIcon.src = "medias/close_button.png";
+      cross.src = "medias/close_button.png";
       section.appendChild(div);
       div.appendChild(tag);
       tag.appendChild(tagText);
-      tag.appendChild(tagIcon);
-      tags.push(tag);
+      tag.appendChild(crossContainer);
+      crossContainer.appendChild(cross);
 
       ////////// pour assigner la bonne couleur au tag
       if (
@@ -53,7 +55,7 @@ export function filterTag(data) {
       ) {
         tag.style.backgroundColor = "#ed6454";
       }
-
+      tags.push(tag);
       sectionRecipes.innerHTML = "";
 
       // pour trier les recettes, les dropdown en fonction des tags choisis
@@ -116,28 +118,31 @@ export function filterTag(data) {
       closeBtn.forEach((btn) => {
         //console.log(closeBtn);
         btn.addEventListener("click", () => {
-          btn.parentElement.remove();
-          tags.forEach((tag) => {
-            // console.log(tags);
-            tags.splice(tags.indexOf(tag), 0);
-          });
+          btn.parentElement.parentElement.remove();
 
-          // on vide la section dropdown
+          if (tags.length >= 1) {
+            tags.splice(tags.indexOf(tag), 1);
 
-          document.querySelector(".filters_section").innerHTML = "";
+            console.log(tags);
+          } else if (tags.length === 0) {
+            // on vide les sections tag et dropdown
+            document.querySelector(" .tag_section").innerHTML = "";
+            document.querySelector(".filters_section").innerHTML = "";
+            document.querySelector(".cards_container").innerHTML = "";
+            recipesArray = "";
+            tags = "";
 
-          recipesArray = "";
-
-          // On remet a zéro les dropdown
-          new IngredientsDropdown(data);
-          new AppliancesDropdown(data);
-          new UstensilsDropdown(data);
-          dropdownFilterSearch();
-          filterTag(data);
-          // On ré-injecte toutes les recettes
-          recipesArray = recipes.forEach((recipe) => {
-            new CreateRecipeCard(recipe);
-          });
+            // On remet a zéro les dropdown
+            new IngredientsDropdown(data);
+            new AppliancesDropdown(data);
+            new UstensilsDropdown(data);
+            dropdownFilterSearch();
+            filterTag(data);
+            // On ré-injecte toutes les recettes
+            recipesArray = recipes.forEach((recipe) => {
+              new CreateRecipeCard(recipe);
+            });
+          }
         });
       });
     });
