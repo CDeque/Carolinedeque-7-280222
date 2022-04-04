@@ -12,6 +12,7 @@ export class CreateMainPage {
     this.data = data;
 
     this.body = document.querySelector("body");
+
     this.createHeader();
     this.createSearchBar();
     this.createDom();
@@ -22,7 +23,6 @@ export class CreateMainPage {
     this.displayRecipes(data);
     dropdownFilterSearch(data);
     filterTag(data);
-    this.closeDropdown();
   }
   // Création du header
   createHeader() {
@@ -79,6 +79,5 @@ export class CreateMainPage {
       new CreateRecipeCard(recipe);
     });
   }
-  closeDropdown() {}
 }
 getRecipes();

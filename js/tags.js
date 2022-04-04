@@ -9,6 +9,7 @@ import { dropdownFilterSearch } from "./filterDropdown.js";
 
 export function filterTag(data) {
   const recipes = data;
+
   const section = document.querySelector(".tag_section");
   let recipesArray = [];
   let tags = [];
@@ -25,32 +26,45 @@ export function filterTag(data) {
       //Ajout du tag en html au clic sur un élément de la liste
       const div = document.createElement("div");
       const tag = document.createElement("div");
+      const tagText = document.createElement("p");
+      const crossContainer = document.createElement("span");
+      const cross = document.createElement("img");
       div.classList.add("tag_search");
       tag.classList.add("tag");
-      tag.innerHTML = `${item.innerHTML}<div class="close_button"><img class="btn" src="medias/close_button.png"></img></div>`;
+      tagText.classList.add("text");
+      crossContainer.classList.add("close_button");
+      cross.classList.add("btn");
+      tagText.innerHTML = item.innerHTML;
+      cross.src = "medias/close_button.png";
       section.appendChild(div);
       div.appendChild(tag);
-      tags.push(tag);
+      tag.appendChild(tagText);
+      tag.appendChild(crossContainer);
+      crossContainer.appendChild(cross);
 
       ////////// pour assigner la bonne couleur au tag
       if (
         item.parentElement.classList.contains("ingredients_options_container")
       ) {
         tag.style.backgroundColor = "#3282f7";
+        tag.setAttribute("id", "in");
       } else if (
         item.parentElement.classList.contains("appliances_options_container")
       ) {
         tag.style.backgroundColor = "#68d9a4";
+        tag.setAttribute("id", "ap");
       } else if (
         item.parentElement.classList.contains("ustensiles_options_container")
       ) {
         tag.style.backgroundColor = "#ed6454";
+        tag.setAttribute("id", "us");
       }
-
+      tags.push(tag);
+      console.log(tags);
       sectionRecipes.innerHTML = "";
 
       // pour trier les recettes, les dropdown en fonction des tags choisis
-      const tagValue = item.innerHTML.toLowerCase();
+      const tagValue = tagText.innerHTML.toLowerCase();
       console.log(tagValue);
       if (tagValue.length > 0) {
         recipes.filter((recipe) => {
@@ -102,35 +116,36 @@ export function filterTag(data) {
       ulContainer.forEach((container) => {
         container.style.display = "none";
       });
-
       //Pour fermer les tags au clic
       const closeBtn = document.querySelectorAll(".close_button");
 
       closeBtn.forEach((btn) => {
-        //console.log(closeBtn);
         btn.addEventListener("click", () => {
-          tags.forEach((tag) => {
-            // console.log(tags);
-            tags.splice(tags.indexOf(tag), 0);
-            btn.parentElement.remove();
-          });
+          btn.parentElement.parentElement.remove();
 
-          // on vide la section dropdown
+          if (tags.length >= 1) {
+            tags.splice(tags.indexOf(tag), 1);
 
-          document.querySelector(".filters_section").innerHTML = "";
+            console.log(tags);
+          } else if (tags.length === 0) {
+            // on vide les sections tag et dropdown
+            document.querySelector(" .tag_section").innerHTML = "";
+            document.querySelector(".filters_section").innerHTML = "";
+            document.querySelector(".cards_container").innerHTML = "";
+            recipesArray = "";
+            tags = "";
 
-          recipesArray = "";
-
-          // On remet a zéro les dropdown
-          new IngredientsDropdown(data);
-          new AppliancesDropdown(data);
-          new UstensilsDropdown(data);
-          dropdownFilterSearch();
-          filterTag(data);
-          // On ré-injecte toutes les recettes
-          recipesArray = recipes.forEach((recipe) => {
-            new CreateRecipeCard(recipe);
-          });
+            // On remet a zéro les dropdown
+            new IngredientsDropdown(data);
+            new AppliancesDropdown(data);
+            new UstensilsDropdown(data);
+            dropdownFilterSearch();
+            filterTag(data);
+            // On ré-injecte toutes les recettes
+            recipesArray = recipes.forEach((recipe) => {
+              new CreateRecipeCard(recipe);
+            });
+          }
         });
       });
     });
