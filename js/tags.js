@@ -126,7 +126,7 @@ export function filterTag(data) {
           if (tags.length >= 1) {
 <<<<<<< HEAD
 =======
-            //on supprime le tag du tableau en fonction de son index
+       
 >>>>>>> parent of 5b84209... Merge remote-tracking branch 'origin/master'
             tags.splice(tags.indexOf(tag), 1);
 
