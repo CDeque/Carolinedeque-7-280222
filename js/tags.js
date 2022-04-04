@@ -124,6 +124,7 @@ export function filterTag(data) {
           btn.parentElement.parentElement.remove();
 
           if (tags.length >= 1) {
+            //on supprime le tag du tableau en fonction de son index
             tags.splice(tags.indexOf(tag), 1);
 
             console.log(tags);
