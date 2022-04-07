@@ -11,13 +11,21 @@ h1 {
   font-size: 36px;
   color: #d04f4f;
 }
-
+form {
+  padding-right: 10px;
+}
 .searchbar {
   border-radius: 5px;
   background-image: url("medias/search_icon.png");
   background-repeat: no-repeat;
   background-position: right;
+  background-position-x: calc(100% - 10px);
   background-size: 20px;
+}
+
+/*. gestion de l'affichage des dropdown*/
+.filters_section {
+  gap: 10px;
 }
 /**** Creation des cartes recettes ****/
 .cards_container {
@@ -41,12 +49,35 @@ h1 {
 .card_body {
   background-color: #e7e7e7;
 }
+
 .recipe_title,
 .time {
   font-family: "DM Sans";
   font-size: 20px;
 }
+.time {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+
+  align-items: center;
+}
+.time_icon {
+  height: 16px;
+  padding-right: 2px;
+}
 .ingredients {
+  list-style: none;
+}
+.ingredients_container {
+  padding-left: 0px !important;
+  padding-right: 6px !important;
+}
+.recipe {
+  padding-left: 6px !important;
+  padding-right: 0 !important;
+}
+.ingredients_list {
   list-style: none;
 }
 .recipes_card {

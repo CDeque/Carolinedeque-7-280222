@@ -27,7 +27,7 @@ export class CreateMainPage {
   // Création du header
   createHeader() {
     this.header = document.createElement("header");
-    this.header.classList.add("header", "text-center");
+    this.header.classList.add("header", "text-center", "container-fluid");
     this.logo = document.createElement("img");
     this.logo.src = "medias/logo.png";
     this.logo.alt = "logo Les Petits Plats";
@@ -61,6 +61,7 @@ export class CreateMainPage {
   // Creation du dom
   createDom() {
     this.main = document.createElement("main");
+    this.main.classList.add("container-fluid");
     this.body.appendChild(this.main);
     this.tagsSection = document.createElement("section");
     this.tagsSection.classList.add("tag_section", "mx-5");
