@@ -11152,6 +11152,7 @@ textarea.form-control-lg {
   font-family: "Lato";
   font-size: 18px;
   font-weight: 700;
+  position: relative;
 }
 
 .arrow_down {
@@ -11185,8 +11186,121 @@ textarea.form-control-lg {
   padding-top: 2px !important;
   padding-left: 10px;
   padding-bottom: 20px;
+  /**** Propriètés du dropdown ****/
+  /**** Propriètés input dropdown ****/
+  /**** Propriètés des liste  ****/
   position: absolute;
   overflow-x: hidden;
+}
+.ingredients_options_container .container {
+  width: 500px !important;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1;
+  margin-top: -70px !important;
+}
+.ingredients_options_container .ingredients_options_container {
+  width: 500px !important;
+  height: auto;
+  max-height: 270px;
+  background-color: #3282f7;
+  border-radius: 5px;
+  position: absolute;
+  overflow-x: scroll;
+  margin-left: 0px !important;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  margin-top: 40px !important;
+}
+.ingredients_options_container .ustensiles_options_container {
+  width: 500px !important;
+  height: auto;
+  max-height: 270px;
+  background-color: #ed6454;
+  border-radius: 5px;
+  position: absolute;
+  overflow-x: scroll;
+  margin-left: 0px !important;
+  padding-top: 50px;
+  padding-bottom: 10px;
+}
+.ingredients_options_container .appliances_options_container {
+  width: 500px !important;
+  height: auto;
+  max-height: 300px;
+  background-color: #68d9a4;
+  border-radius: 5px;
+  position: absolute;
+  overflow-x: scroll;
+  margin-left: 0px !important;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+.ingredients_options_container .input_container {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  margin-top: 20px;
+  background-color: #3282f7;
+  border-radius: 5px 5px 0 0;
+}
+.ingredients_options_container .ing {
+  background-color: #3282f7;
+}
+.ingredients_options_container .app {
+  background-color: #68d9a4;
+}
+.ingredients_options_container .ust {
+  background-color: #ed6454;
+}
+.ingredients_options_container .arrow_up {
+  position: absolute;
+  left: 95%;
+  top: 7%;
+}
+.ingredients_options_container .search_ingredient {
+  height: 30px;
+  background-color: #3282f7;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  position: absolute;
+  width: 450px !important;
+  margin-top: 5px;
+}
+.ingredients_options_container .search_ustensiles {
+  height: 30px;
+  background-color: #ed6454;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  position: absolute;
+  width: 450px !important;
+  margin-top: 5px;
+}
+.ingredients_options_container .search_devices {
+  height: 30px;
+  background-color: #68d9a4;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  position: absolute;
+  width: 450px !important;
+  margin-top: 5px;
+}
+.ingredients_options_container .ing_list,
+.ingredients_options_container .ust_list,
+.ingredients_options_container .appli_list {
+  list-style: none;
+  font-family: "Lato";
+  font-weight: 400;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
 }
 
 .ustensiles_options_container {
@@ -11286,6 +11400,24 @@ h1, .h1 {
   color: #d04f4f;
 }
 
+form {
+  padding-right: 10px;
+}
+
+.searchbar {
+  border-radius: 5px;
+  background-image: url("medias/search_icon.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-position-x: calc(100% - 10px);
+  background-size: 20px;
+}
+
+/*. gestion de l'affichage des dropdown*/
+.filters_section {
+  gap: 10px;
+}
+
 /**** Creation des cartes recettes ****/
 .cards_container {
   gap: 10rem;
@@ -11318,7 +11450,33 @@ h1, .h1 {
   font-size: 20px;
 }
 
+.time {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+  align-items: center;
+}
+
+.time_icon {
+  height: 16px;
+  padding-right: 2px;
+}
+
 .ingredients {
+  list-style: none;
+}
+
+.ingredients_container {
+  padding-left: 0px !important;
+  padding-right: 6px !important;
+}
+
+.recipe {
+  padding-left: 6px !important;
+  padding-right: 0 !important;
+}
+
+.ingredients_list {
   list-style: none;
 }
 
@@ -11340,10 +11498,8 @@ h1, .h1 {
   max-width: 300px;
   height: 40px;
   border-radius: 5px;
-  background-color: #3282f7;
   display: flex;
-  justify-content: space-between;
-  padding: 5px;
+  align-items: center;
 }
 
 .text {
@@ -11353,6 +11509,7 @@ h1, .h1 {
   font-weight: 700;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 5px;
 }
 
