@@ -7,65 +7,89 @@ import { dropdownFilterSearch } from "./filterDropdown.js";
 // Ajout de la fonction tag au clic sur un élément //
 /////////////////////////////////////////////////////
 
-export function filterTag(data) {
-  const recipes = data;
+export class FilterTags {
+  constructor(data) {
+    const recipes = data;
 
-  const section = document.querySelector(".tag_section");
-  let recipesArray = [];
-  let tags = [];
-  let itemArray = [];
-  const sectionRecipes = document.querySelector(".cards_container");
+    this.section = document.querySelector(".tag_section");
+    this.itemLists = document.querySelectorAll(
+      "li.ing_list,li.appli_list, li.ust_list"
+    );
+    this.tags = [];
+    this.recipesArray = [];
+    this.sectionRecipes = document.querySelector(".cards_container");
 
-  const itemLists = document.querySelectorAll(
-    "li.ing_list,li.appli_list, li.ust_list"
-  );
+    this.createTag(recipes);
+  }
+  createTag(recipes) {
+    // Creation du tag au clic sur un élément li
+    this.itemLists.forEach((item) => {
+      item.addEventListener("click", () => {
+        //Ajout du tag en html au clic sur un élément de la liste
+        this.div = document.createElement("div");
+        this.tag = document.createElement("div");
+        this.tagText = document.createElement("p", "mb-0");
+        this.crossContainer = document.createElement("span");
+        this.cross = document.createElement("img");
+        this.div.classList.add("tag_search");
+        this.tag.classList.add("tag");
+        this.tagText.classList.add("text");
+        this.crossContainer.classList.add("close_button");
+        this.cross.classList.add("btn");
+        this.tagText.innerHTML = item.innerHTML;
+        this.cross.src = "medias/close_button.png";
+        this.section.appendChild(this.div);
+        this.div.appendChild(this.tag);
+        this.tag.appendChild(this.tagText);
+        this.tag.appendChild(this.crossContainer);
+        this.crossContainer.appendChild(this.cross);
 
-  // Creation du tag au clic sur un élément li
-  itemLists.forEach((item) => {
-    item.addEventListener("click", () => {
-      //Ajout du tag en html au clic sur un élément de la liste
-      const div = document.createElement("div");
-      const tag = document.createElement("div");
-      const tagText = document.createElement("p");
-      const crossContainer = document.createElement("span");
-      const cross = document.createElement("img");
-      div.classList.add("tag_search");
-      tag.classList.add("tag");
-      tagText.classList.add("text");
-      crossContainer.classList.add("close_button");
-      cross.classList.add("btn");
-      tagText.innerHTML = item.innerHTML;
-      cross.src = "medias/close_button.png";
-      section.appendChild(div);
-      div.appendChild(tag);
-      tag.appendChild(tagText);
-      tag.appendChild(crossContainer);
-      crossContainer.appendChild(cross);
+        ////////// pour assigner la bonne couleur au tag
+        if (
+          item.parentElement.classList.contains("ingredients_options_container")
+        ) {
+          this.tag.style.backgroundColor = "#3282f7";
+          this.tag.setAttribute("id", "in");
+        } else if (
+          item.parentElement.classList.contains("appliances_options_container")
+        ) {
+          this.tag.style.backgroundColor = "#68d9a4";
+          this.tag.setAttribute("id", "ap");
+        } else if (
+          item.parentElement.classList.contains("ustensiles_options_container")
+        ) {
+          this.tag.style.backgroundColor = "#ed6454";
+          this.tag.setAttribute("id", "us");
+        }
 
-      ////////// pour assigner la bonne couleur au tag
-      if (
-        item.parentElement.classList.contains("ingredients_options_container")
-      ) {
-        tag.style.backgroundColor = "#3282f7";
-        tag.setAttribute("id", "in");
-      } else if (
-        item.parentElement.classList.contains("appliances_options_container")
-      ) {
-        tag.style.backgroundColor = "#68d9a4";
-        tag.setAttribute("id", "ap");
-      } else if (
-        item.parentElement.classList.contains("ustensiles_options_container")
-      ) {
-        tag.style.backgroundColor = "#ed6454";
-        tag.setAttribute("id", "us");
-      }
-      tags.push(tag);
-      console.log(tags);
-      sectionRecipes.innerHTML = "";
+        //pour fermer les dropdown au clic sur un element
+        const ulContainer = document.querySelectorAll(".container");
+        ulContainer.forEach((container) => {
+          container.style.display = "none";
+        });
 
-      // pour trier les recettes, les dropdown en fonction des tags choisis
-      const tagValue = tagText.innerHTML.toLowerCase();
-      console.log(tagValue);
+        const filtersContainer = document.querySelectorAll(".filter");
+        filtersContainer.forEach((fil) => {
+          fil.style.width = "200px";
+        });
+        this.tags.push(this.tagText.innerHTML);
+        console.log(this.tags);
+        this.filterTag(recipes, this.tags);
+        this.closeTag(recipes);
+      });
+    });
+  }
+
+  filterTag(recipes) {
+    this.recipesArray = [];
+    let itemArray = [];
+    const itemLists = document.querySelectorAll(
+      "li.ing_list,li.appli_list, li.ust_list"
+    );
+    //on filtre le tableau de tags
+    this.tags.forEach((tag) => {
+      const tagValue = tag.toLowerCase();
+      //console.log(tagValue);
       if (tagValue.length > 0) {
         recipes.filter((recipe) => {
           if (
@@ -78,9 +102,13 @@ export function filterTag(data) {
             recipe.ustensils.some((ust) => ust.toLowerCase().match(tagValue))
           ) {
             //On re-injecte les recettes dans la section
-            recipesArray.push(recipe);
+            this.sectionRecipes.innerHTML = "";
 
-            new CreateRecipeCard(recipe);
+            this.recipesArray.push(recipe);
+            this.recipesArray.forEach((rec) => {
+              new CreateRecipeCard(rec);
+            });
+            console.log(this.recipesArray);
 
             // Pour trier les menus dropdown en ne laissant que les elements correspondants aux recettes
             itemLists.forEach((item) => {
@@ -110,45 +138,41 @@ export function filterTag(data) {
           }
         });
       }
+    });
+  }
+  closeTag(recipes) {
+    const closeBtn = document.querySelectorAll(".close_button");
 
-      //pour fermer les dropdown au clic sur un element
-      const ulContainer = document.querySelectorAll(".container");
-      ulContainer.forEach((container) => {
-        container.style.display = "none";
-      });
-      //Pour fermer les tags au clic
-      const closeBtn = document.querySelectorAll(".close_button");
+    closeBtn.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        //supprime l'élément html
+        btn.parentElement.parentElement.remove();
+        if (this.tags.length) {
+          // supprime le tag en fonction de son index du tableau
+          this.tags.splice(this.tags.indexOf(this.tag), 1);
 
-      closeBtn.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          btn.parentElement.parentElement.remove();
+          this.filterTag(recipes);
+        } else if (!this.tags.length) {
+          // on vide les sections tag et dropdown
+          document.querySelector(" .tag_section").innerHTML = "";
+          document.querySelector(".filters_section").innerHTML = "";
+          document.querySelector(".cards_container").innerHTML = "";
+          this.recipesArray = "";
+          this.tags = "";
 
-          if (tags.length >= 1) {
-            //on supprime le tag du tableau en fonction de son index
-            tags.splice(tags.indexOf(tag), 1);
+          // On ré-injecte toutes les recettes
+          this.recipesArray = recipes.forEach((recipe) => {
+            new CreateRecipeCard(recipe);
+          });
 
-            console.log(tags);
-          } else if (tags.length === 0) {
-            // on vide les sections tag et dropdown
-            document.querySelector(" .tag_section").innerHTML = "";
-            document.querySelector(".filters_section").innerHTML = "";
-            document.querySelector(".cards_container").innerHTML = "";
-            recipesArray = "";
-            tags = "";
-
-            // On remet a zéro les dropdown
-            new IngredientsDropdown(data);
-            new AppliancesDropdown(data);
-            new UstensilsDropdown(data);
-            dropdownFilterSearch();
-            filterTag(data);
-            // On ré-injecte toutes les recettes
-            recipesArray = recipes.forEach((recipe) => {
-              new CreateRecipeCard(recipe);
-            });
-          }
-        });
+          // On remet a zéro les dropdown
+          new IngredientsDropdown(recipes);
+          new AppliancesDropdown(recipes);
+          new UstensilsDropdown(recipes);
+          dropdownFilterSearch();
+          new FilterTags(recipes);
+        }
       });
     });
-  });
+  }
 }

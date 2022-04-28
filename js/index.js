@@ -5,7 +5,7 @@ import { AppliancesDropdown } from "./applianceDropdown.js";
 import { CreateRecipeCard } from "./recipesCards.js";
 import { searchFilter } from "./filterRecipes.js";
 import { dropdownFilterSearch } from "./filterDropdown.js";
-import { filterTag } from "./tags.js";
+import { FilterTags } from "./tags.js";
 
 export class CreateMainPage {
   constructor(data) {
@@ -22,7 +22,7 @@ export class CreateMainPage {
     new searchFilter(data);
     this.displayRecipes(data);
     dropdownFilterSearch(data);
-    filterTag(data);
+    new FilterTags(data);
   }
   // Création du header
   createHeader() {
