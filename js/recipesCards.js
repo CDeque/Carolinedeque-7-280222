@@ -16,7 +16,7 @@ export class CreateRecipeCard {
     this.divImg = document.createElement("div");
     this.divImg.classList.add("card_picture");
     this.div = document.createElement("div");
-    this.div.classList.add("card_body", "pt-2", "px-2");
+    this.div.classList.add("card_body", "pt-1", "px-2");
     this.headerCard = document.createElement("div");
     this.headerCard.classList.add("card_header", "row", "mx-0");
     this.recipeTitle = document.createElement("h2");
