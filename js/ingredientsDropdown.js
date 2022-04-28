@@ -60,6 +60,7 @@ export class IngredientsDropdown {
     items.forEach((item) =>
       item.ingredients.forEach((ingredient) => {
         ingredientsArray.push(ingredient.ingredient.toLowerCase());
+        ingredientsArray.sort();
       })
     );
 
