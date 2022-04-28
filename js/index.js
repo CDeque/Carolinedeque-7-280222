@@ -5,13 +5,14 @@ import { AppliancesDropdown } from "./applianceDropdown.js";
 import { CreateRecipeCard } from "./recipesCards.js";
 import { searchFilter } from "./filterRecipes.js";
 import { dropdownFilterSearch } from "./filterDropdown.js";
-import { filterTag } from "./tags.js";
+import { FilterTags } from "./tags.js";
 
 export class CreateMainPage {
   constructor(data) {
     this.data = data;
 
     this.body = document.querySelector("body");
+
     this.createHeader();
     this.createSearchBar();
     this.createDom();
@@ -21,13 +22,12 @@ export class CreateMainPage {
     new searchFilter(data);
     this.displayRecipes(data);
     dropdownFilterSearch(data);
-    filterTag(data);
-    this.closeDropdown();
+    new FilterTags(data);
   }
   // Création du header
   createHeader() {
     this.header = document.createElement("header");
-    this.header.classList.add("header", "text-center");
+    this.header.classList.add("header", "text-center", "container-fluid");
     this.logo = document.createElement("img");
     this.logo.src = "medias/logo.png";
     this.logo.alt = "logo Les Petits Plats";
@@ -53,6 +53,7 @@ export class CreateMainPage {
     this.input.name = "search";
     this.input.style.backgroundColor = "#e7e7e7";
     this.input.setAttribute("placeholder", "Rechercher une recette...");
+
     this.input.focus();
     this.header.appendChild(this.form);
     this.form.appendChild(this.input);
@@ -60,6 +61,7 @@ export class CreateMainPage {
   // Creation du dom
   createDom() {
     this.main = document.createElement("main");
+    this.main.classList.add("container-fluid");
     this.body.appendChild(this.main);
     this.tagsSection = document.createElement("section");
     this.tagsSection.classList.add("tag_section", "mx-5");
@@ -79,6 +81,5 @@ export class CreateMainPage {
       new CreateRecipeCard(recipe);
     });
   }
-  closeDropdown() {}
 }
 getRecipes();
