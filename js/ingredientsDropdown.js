@@ -17,10 +17,10 @@ export class IngredientsDropdown {
     this.div = document.createElement("div");
     this.div.classList.add("filter_div");
     this.itemsContainer = document.createElement("div");
-    this.itemsContainer.classList.add("container", "row", "px-0");
+    this.itemsContainer.classList.add("container", "row", "px-0", "mx-0");
     this.itemsContainer.style.display = "none";
     this.ul = document.createElement("ul");
-    this.ul.classList.add("ingredients_options_container", "row");
+    this.ul.classList.add("ingredients_options_container", "row", "px-0");
     this.dropdownBtn = document.createElement("button");
     this.dropdownBtn.classList.add(
       "dropdown_btn",
@@ -60,6 +60,7 @@ export class IngredientsDropdown {
     items.forEach((item) =>
       item.ingredients.forEach((ingredient) => {
         ingredientsArray.push(ingredient.ingredient.toLowerCase());
+        ingredientsArray.sort();
       })
     );
 
@@ -75,6 +76,7 @@ export class IngredientsDropdown {
       this.li.innerHTML =
         ingredient.charAt(0).toUpperCase() +
         ingredient.substring(1).toLowerCase();
+
       this.ul.appendChild(this.li);
     });
   }
@@ -90,8 +92,8 @@ export class IngredientsDropdown {
   }
   closeDropdown() {
     this.arrowUp.addEventListener("click", () => {
-      this.itemsContainer.style.display = "none";
       this.filter.style.width = "200px";
+      this.itemsContainer.style.display = "none";
     });
   }
 }

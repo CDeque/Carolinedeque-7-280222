@@ -61,6 +61,7 @@ export class UstensilsDropdown {
     items.forEach((item) =>
       item.ustensils.forEach((ustensil) => {
         ustensilsArray.push(ustensil.toLowerCase());
+        ustensilsArray.sort();
       })
     );
 

@@ -54,6 +54,7 @@ export class AppliancesDropdown {
 
     items.forEach((item) => {
       appliancesArray.push(item.appliance.toLowerCase());
+      appliancesArray.sort();
     });
 
     //on filtre le tableau pour supprimer les doublons
